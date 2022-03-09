@@ -8,6 +8,7 @@ public class LoginDTO {
     private String user;
     private String password;
     private String device;
+    private String response;
 
     public boolean isUser_app() {
         return user_app;
@@ -39,6 +40,14 @@ public class LoginDTO {
 
     public void setDevice(String device) {
         this.device = device;
+    }
+
+    public String getResponse() {
+        return response;
+    }
+
+    public void setResponse(String response) {
+        this.response = response;
     }
 
 }

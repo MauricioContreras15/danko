@@ -1,6 +1,7 @@
 package com.wposs.danko.login.view;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -8,19 +9,19 @@ import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
-
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import com.wposs.danko.R;
 import com.wposs.danko.interfaces.OnResponseInterface;
 import com.wposs.danko.io.ConsumeServicesExpress;
-import com.wposs.danko.login.dto.LoginDTO;
 import com.wposs.danko.login.interfaces.Login;
 import com.wposs.danko.login.presenter.LoginPresenter;
 import com.wposs.danko.utils.Defines;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class ActivityLogin extends AppCompatActivity implements View.OnClickListener, Login.View {
 
@@ -29,6 +30,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
     private EditText capUser;
     private EditText capPass;
     private Login.Presenter presenter;
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,6 +65,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         buttonInvitado = findViewById(R.id.buttonInvitado);
         capUser = (EditText) findViewById(R.id.capUser);
         capPass = (EditText) findViewById(R.id.capPass);
+        progressDialog = new ProgressDialog(ActivityLogin.this);
 
     }
 
@@ -76,7 +79,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         presenter = new LoginPresenter(this);
         String user = String.valueOf(capUser.getText());
         String psw = String.valueOf(capPass.getText());
-        Toast.makeText(this, "SERIAL:" + getSerial(), Toast.LENGTH_SHORT).show();
 
 
         if (user != null && !user.trim().isEmpty() && psw != null && !psw.trim().isEmpty()) {
@@ -87,9 +89,20 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
             builder.setPositiveButton("Sí", new DialogInterface.OnClickListener() {
 
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    LoginDTO loginDTO = new LoginDTO();
-                    loginDTO.setUser(user);
-                    loginDTO.setPassword(psw);
+                    progressDialog = new ProgressDialog(ActivityLogin.this);
+                    progressDialog.setTitle("Consultando...");
+                    progressDialog.show();
+
+                    try {
+                        JSONObject jsonObject = new JSONObject();
+                        jsonObject.put("user_app", true);
+                        jsonObject.put("user", user);
+                        jsonObject.put("password", psw);
+                        jsonObject.put("device", getSerial());
+                        presenter.RequestLogin(jsonObject);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
 
                 }
             });
@@ -137,6 +150,9 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void showError(String error) {
+        if (progressDialog.isShowing()){
+            progressDialog.cancel();
+        }
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(false);
         builder.setTitle("Advertencia!");

@@ -3,6 +3,8 @@ package com.wposs.danko.login.presenter;
 import com.wposs.danko.login.interactor.LoginInteractor;
 import com.wposs.danko.login.interfaces.Login;
 
+import org.json.JSONObject;
+
 public class LoginPresenter implements Login.Presenter {
 
     private Login.View view;
@@ -14,7 +16,7 @@ public class LoginPresenter implements Login.Presenter {
     }
 
     @Override
-    public void RequestLogin(String req) {
+    public void RequestLogin(JSONObject req) {
         interactor.consumoLogin(req);
     }
 

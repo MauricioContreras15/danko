@@ -1,6 +1,19 @@
 package com.wposs.danko.login.interfaces;
 
+import com.wposs.danko.login.dto.LoginDTO;
+import org.json.JSONObject;
+
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
+import retrofit2.http.Headers;
+import retrofit2.http.POST;
+
 public interface Login {
+
+    @Headers("Content-Type:application/json;charset=UTF-8")
+    @POST("search")
+    Call<LoginDTO> consultaLogin(@Body RequestBody body);
 
     interface View {
         void showResultLogin(String resp);
@@ -8,12 +21,12 @@ public interface Login {
     }
 
     interface Presenter {
-        void RequestLogin(String req);
+        void RequestLogin(JSONObject req);
         void ResponseLogin(String resp);
         void showError(String error);
     }
 
     interface Interactor {
-        void consumoLogin(String query);
+        void consumoLogin(JSONObject jsonObject);
     }
 }
