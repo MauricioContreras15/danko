@@ -37,7 +37,12 @@ public class LoginInteractor implements Login.Interactor{
             @Override
             public void onResponse(Call<LoginDTO> call, Response<LoginDTO> response) {
                 if(response.isSuccessful()){
-                    presenter.ResponseLogin(response.body().getResponse());
+                    LoginDTO loginDTO = response.body();
+                    if (loginDTO != null && loginDTO.getCategorias().size() > 0){
+                        presenter.ResponseLogin(loginDTO);
+                    } else {
+                        presenter.showError("Usuario inexistente");
+                    }
                 } else {
                     presenter.showError("Usuario inexistente");
                 }

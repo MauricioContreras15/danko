@@ -17,6 +17,7 @@ import androidx.core.app.ActivityCompat;
 import com.wposs.danko.R;
 import com.wposs.danko.interfaces.OnResponseInterface;
 import com.wposs.danko.io.ConsumeServicesExpress;
+import com.wposs.danko.login.dto.LoginDTO;
 import com.wposs.danko.login.interfaces.Login;
 import com.wposs.danko.login.presenter.LoginPresenter;
 import com.wposs.danko.utils.Defines;
@@ -31,6 +32,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
     private EditText capPass;
     private Login.Presenter presenter;
     private ProgressDialog progressDialog;
+    private Context context = ActivityLogin.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,7 +82,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         String user = String.valueOf(capUser.getText());
         String psw = String.valueOf(capPass.getText());
 
-
         if (user != null && !user.trim().isEmpty() && psw != null && !psw.trim().isEmpty()) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setCancelable(false);
@@ -92,7 +93,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
                     progressDialog = new ProgressDialog(ActivityLogin.this);
                     progressDialog.setTitle("Consultando...");
                     progressDialog.show();
-
                     try {
                         JSONObject jsonObject = new JSONObject();
                         jsonObject.put("user_app", true);
@@ -103,7 +103,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
             });
             builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -121,9 +120,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
 
     public String getSerial() {
-        Context context = ActivityLogin.this;
-        String id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-        return id;
+        return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
     public void echoTest() {
@@ -144,7 +141,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void showResultLogin(String resp) {
+    public void showResultLogin(LoginDTO resp) {
 
     }
 

@@ -1,5 +1,6 @@
 package com.wposs.danko.login.presenter;
 
+import com.wposs.danko.login.dto.LoginDTO;
 import com.wposs.danko.login.interactor.LoginInteractor;
 import com.wposs.danko.login.interfaces.Login;
 
@@ -21,7 +22,7 @@ public class LoginPresenter implements Login.Presenter {
     }
 
     @Override
-    public void ResponseLogin(String resp) {
+    public void ResponseLogin(LoginDTO resp) {
         view.showResultLogin(resp);
     }
 
