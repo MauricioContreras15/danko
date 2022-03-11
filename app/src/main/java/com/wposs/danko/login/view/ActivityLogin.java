@@ -4,27 +4,38 @@ import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import com.wposs.danko.R;
+import com.wposs.danko.home.ActivityHome;
 import com.wposs.danko.interfaces.OnResponseInterface;
 import com.wposs.danko.io.ConsumeServicesExpress;
+import com.wposs.danko.login.dto.CategoriasDTO;
 import com.wposs.danko.login.dto.LoginDTO;
 import com.wposs.danko.login.interfaces.Login;
 import com.wposs.danko.login.presenter.LoginPresenter;
 import com.wposs.danko.utils.Defines;
+import com.wposs.danko.utils.Global;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ActivityLogin extends AppCompatActivity implements View.OnClickListener, Login.View {
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ActivityLogin extends AppCompatActivity implements View.OnClickListener, Login.View, Serializable {
 
     private Button buttonEnter;
     private Button buttonInvitado;
@@ -142,7 +153,13 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void showResultLogin(LoginDTO resp) {
-
+        if (progressDialog.isShowing()){
+            progressDialog.cancel();
+        }
+        Toast.makeText(context, resp.getResponse(), Toast.LENGTH_SHORT).show();
+        Global.categoriasDTO = resp.getCategorias();
+        Intent intent = new Intent(context, ActivityHome.class);
+        startActivity(intent);
     }
 
     @Override

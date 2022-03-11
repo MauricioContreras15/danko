@@ -1,5 +1,6 @@
 package com.wposs.danko.login.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CategoriasDTO {
@@ -8,7 +9,7 @@ public class CategoriasDTO {
     private String name;
     private String description;
     private String img;
-    private List<BusinessDTO> businessDTOList;
+    private ArrayList<BusinessDTO> businessDTOList;
 
     public String getId() {
         return id;
@@ -42,11 +43,11 @@ public class CategoriasDTO {
         this.img = img;
     }
 
-    public List<BusinessDTO> getBusinessDTOList() {
+    public ArrayList<BusinessDTO> getBusinessDTOList() {
         return businessDTOList;
     }
 
-    public void setBusinessDTOList(List<BusinessDTO> businessDTOList) {
+    public void setBusinessDTOList(ArrayList<BusinessDTO> businessDTOList) {
         this.businessDTOList = businessDTOList;
     }
 

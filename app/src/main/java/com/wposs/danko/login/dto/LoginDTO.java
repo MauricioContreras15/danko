@@ -1,13 +1,13 @@
 package com.wposs.danko.login.dto;
 
-import org.json.JSONObject;
-
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class LoginDTO {
+public class LoginDTO extends ArrayList<String> implements Serializable {
 
     private String response;
-    private List<CategoriasDTO> categorias;
+    private ArrayList<CategoriasDTO> categorias;
 
     public String getResponse() {
         return response;
@@ -17,11 +17,11 @@ public class LoginDTO {
         this.response = response;
     }
 
-    public List<CategoriasDTO> getCategorias() {
+    public ArrayList<CategoriasDTO> getCategorias() {
         return categorias;
     }
 
-    public void setCategorias(List<CategoriasDTO> categorias) {
+    public void setCategorias(ArrayList<CategoriasDTO> categorias) {
         this.categorias = categorias;
     }
 
