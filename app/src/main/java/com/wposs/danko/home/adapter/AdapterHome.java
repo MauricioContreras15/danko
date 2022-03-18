@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wposs.danko.R;
+import com.wposs.danko.home.interfaces.Home_interface;
+import com.wposs.danko.home.presenter.HomePresenter;
 import com.wposs.danko.login.dto.CategoriasDTO;
 
 import java.util.ArrayList;
@@ -22,6 +24,8 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder> {
 
     ArrayList<CategoriasDTO> categoriasDTOS;
     Context context;
+
+    private Home_interface.Presenter presenter = new HomePresenter();
 
     public AdapterHome(ArrayList<CategoriasDTO> categoriasDTOS, Context context) {
         this.categoriasDTOS = categoriasDTOS;
@@ -42,7 +46,7 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder> {
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.image_categoria);
         holder.name_categoria.setText(categoriasDTOS.get(position).getName());
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView_categoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 /// evento
@@ -60,12 +64,14 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder> {
 
         ImageView image_categoria;
         TextView name_categoria;
-        CardView cardView;
+        CardView cardView_categoria;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             image_categoria = itemView.findViewById(R.id.image_categoria);
             name_categoria = itemView.findViewById(R.id.name_categoria);
-            cardView = itemView.findViewById(R.id.card_view);
+            cardView_categoria = itemView.findViewById(R.id.card_view);
+
         }
     }
+
 }
