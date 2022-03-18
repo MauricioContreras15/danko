@@ -49,7 +49,7 @@ public class AdapterHome extends RecyclerView.Adapter<AdapterHome.ViewHolder> {
         holder.cardView_categoria.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /// evento
+                presenter.setResponse(categoriasDTOS.get(position).getBusinessDTOList(), context);
             }
         });
 

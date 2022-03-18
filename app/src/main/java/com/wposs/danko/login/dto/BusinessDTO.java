@@ -8,6 +8,9 @@ public class BusinessDTO {
     private String description;
     private String img;
     private String url;
+    private String pais;
+    private String estado;
+    private String ciudad;
 
     public String getId_categorie() {
         return id_categorie;
@@ -56,4 +59,29 @@ public class BusinessDTO {
     public void setUrl(String url) {
         this.url = url;
     }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+
+    public String getCiudad() {
+        return ciudad;
+    }
+
+    public void setCiudad(String ciudad) {
+        this.ciudad = ciudad;
+    }
+
 }

@@ -156,7 +156,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         if (progressDialog.isShowing()){
             progressDialog.cancel();
         }
-        Toast.makeText(context, resp.getResponse(), Toast.LENGTH_SHORT).show();
         Global.categoriasDTO = resp.getCategorias();
         Intent intent = new Intent(context, ActivityHome.class);
         startActivity(intent);
