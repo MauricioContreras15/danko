@@ -19,6 +19,7 @@ import com.wposs.danko.R;
 import com.wposs.danko.home.ActivityHome;
 import com.wposs.danko.interfaces.OnResponseInterface;
 import com.wposs.danko.io.ConsumeServicesExpress;
+import com.wposs.danko.login.dto.BusinessDTO;
 import com.wposs.danko.login.dto.CategoriasDTO;
 import com.wposs.danko.login.dto.LoginDTO;
 import com.wposs.danko.login.interfaces.Login;
@@ -156,6 +157,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         if (progressDialog.isShowing()){
             progressDialog.cancel();
         }
+        addLocation(resp.getCategorias());
         Global.categoriasDTO = resp.getCategorias();
         Intent intent = new Intent(context, ActivityHome.class);
         startActivity(intent);
@@ -178,4 +180,53 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         });
         builder.show();
     }
+
+    private void addLocation(ArrayList<CategoriasDTO> categoriasDTO){
+        for (int i = 0; i < categoriasDTO.size(); i++){
+            ArrayList<BusinessDTO> businessDTO = categoriasDTO.get(i).getBusinessDTOList();
+
+            for (int j = 0; j < businessDTO.size(); j++) {
+                String pais = businessDTO.get(j).getPais();
+                String estado = businessDTO.get(j).getEstado();
+                String ciudad = businessDTO.get(j).getCiudad();
+                if (Global.pais.size() == 0) {
+                    Global.pais.add(pais);
+                } else {
+                    boolean existe = false;
+                    for (int x = 0; x < Global.pais.size(); x++) {
+                        if (pais.equalsIgnoreCase(Global.pais.get(x))) {
+                            existe = true;
+                            break;
+                        }
+                    }
+                    if (!existe) Global.pais.add(pais);
+                }
+                if (Global.estado.size() == 0) {
+                    Global.estado.add(estado);
+                } else {
+                    boolean existe = false;
+                    for (int x = 0; x < Global.estado.size(); x++) {
+                        if (estado.equalsIgnoreCase(Global.estado.get(x))) {
+                            existe = true;
+                            break;
+                        }
+                    }
+                    if (!existe) Global.estado.add(estado);
+                }
+                if (Global.ciudad.size() == 0) {
+                    Global.ciudad.add(ciudad);
+                } else {
+                    boolean existe = false;
+                    for (int x = 0; x < Global.ciudad.size(); x++) {
+                        if (ciudad.equalsIgnoreCase(Global.ciudad.get(x))) {
+                            existe = true;
+                            break;
+                        }
+                    }
+                    if (!existe) Global.ciudad.add(ciudad);
+                }
+            }
+        }
+    }
+
 }

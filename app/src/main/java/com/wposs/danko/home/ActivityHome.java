@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import com.wposs.danko.R;
 import com.wposs.danko.business.ActivityBusiness;
@@ -22,11 +24,13 @@ import java.util.ArrayList;
 public class ActivityHome extends AppCompatActivity implements Home_interface.View {
 
     private ArrayList<CategoriasDTO> categoriasDTO = Global.categoriasDTO;
-    private EditText cap_pais;
-    private EditText cap_estado;
-    private EditText cap_city;
+    private ArrayList<String> paises = Global.pais;
+    private ArrayList<String> estados = Global.estado;
+    private ArrayList<String> ciudades = Global.ciudad;
+    private AutoCompleteTextView cap_pais;
+    private AutoCompleteTextView cap_estado;
+    private AutoCompleteTextView cap_city;
     private RecyclerView recyclerView;
-    private Context context = ActivityHome.this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +45,18 @@ public class ActivityHome extends AppCompatActivity implements Home_interface.Vi
         cap_estado = findViewById(R.id.capEstado);
         cap_city = findViewById(R.id.capCiudad);
         recyclerView = findViewById(R.id.recycler);
+
+        ArrayAdapter<String> adapter_pais = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, paises);
+        cap_pais.setAdapter(adapter_pais);
+
+        ArrayAdapter<String> adapter_estado = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, estados);
+        cap_estado.setAdapter(adapter_estado);
+
+        ArrayAdapter<String> adapter_ciudad = new ArrayAdapter<>(this,
+                android.R.layout.simple_list_item_1, ciudades);
+        cap_city.setAdapter(adapter_ciudad);
     }
 
     private void generarlista(){

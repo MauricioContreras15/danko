@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/capPais"
             android:layout_width="350sp"
             android:layout_height="40sp"
@@ -28,11 +28,12 @@
             android:textColor="@color/colorInitBack"
             android:textColorHint="@color/colorInitBack"
             android:textSize="15sp"
+            android:completionThreshold="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/capEstado"
             android:layout_width="350sp"
             android:layout_height="40sp"
@@ -46,12 +47,13 @@
             android:textColor="@color/colorInitBack"
             android:textColorHint="@color/colorInitBack"
             android:textSize="15sp"
+            android:completionThreshold="1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.491"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/capPais" />
 
-        <EditText
+        <AutoCompleteTextView
             android:id="@+id/capCiudad"
             android:layout_width="350sp"
             android:layout_height="40sp"
@@ -66,6 +68,7 @@
             android:textColor="@color/colorInitBack"
             android:textColorHint="@color/colorInitBack"
             android:textSize="15sp"
+            android:completionThreshold="1"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.508"

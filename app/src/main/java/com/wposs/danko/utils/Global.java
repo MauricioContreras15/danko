@@ -10,5 +10,8 @@ public class Global {
 
     public static ArrayList<CategoriasDTO> categoriasDTO = new ArrayList<>();
     public static ArrayList<BusinessDTO> BusinessDTO = new ArrayList<>();
+    public static ArrayList<String> pais = new ArrayList<>();
+    public static ArrayList<String> estado = new ArrayList<>();
+    public static ArrayList<String> ciudad = new ArrayList<>();
 
 }
