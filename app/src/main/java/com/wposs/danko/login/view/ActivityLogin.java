@@ -22,8 +22,7 @@ import com.wposs.danko.io.ConsumeServicesExpress;
 import com.wposs.danko.login.dto.BusinessDTO;
 import com.wposs.danko.login.dto.CategoriasDTO;
 import com.wposs.danko.login.dto.LoginDTO;
-import com.wposs.danko.login.interfaces.Login;
-import com.wposs.danko.login.presenter.LoginPresenter;
+import com.wposs.danko.model.JsonResponse;
 import com.wposs.danko.utils.Defines;
 import com.wposs.danko.utils.Global;
 
@@ -32,17 +31,13 @@ import org.json.JSONObject;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-public class ActivityLogin extends AppCompatActivity implements View.OnClickListener, Login.View, Serializable {
+public class ActivityLogin extends AppCompatActivity implements View.OnClickListener {
 
     private Button buttonEnter;
     private Button buttonInvitado;
     private EditText capUser;
     private EditText capPass;
-    private Login.Presenter presenter;
     private ProgressDialog progressDialog;
     private Context context = ActivityLogin.this;
 
@@ -53,7 +48,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
         requestPermission();
         initComponents();
-        //events();
 
     }
 
@@ -90,7 +84,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     private void validateField() {
-        presenter = new LoginPresenter(this);
         String user = String.valueOf(capUser.getText());
         String psw = String.valueOf(capPass.getText());
 
@@ -111,7 +104,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
                         jsonObject.put("user", user);
                         jsonObject.put("password", psw);
                         jsonObject.put("device", getSerial());
-                        presenter.RequestLogin(jsonObject);
+                        login(jsonObject);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -125,7 +118,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
             });
             builder.show();
         } else {
-            presenter.showError("Debe ingresar usuario y contraseña");
+            showError("Debe ingresar usuario y contraseña");
             return;
         }
     }
@@ -139,20 +132,17 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
 
         new ConsumeServicesExpress().consume_api(Defines.ECHOTEST, new OnResponseInterface() {
             @Override
-            public void finish_consumer_services() {
-                Toast.makeText(ActivityLogin.this, "Servidor En Linea", Toast.LENGTH_SHORT).show();
-
+            public void finish_consumer_services(JsonResponse jsonResponse) {
 
             }
 
             @Override
             public void finish_fail_consumer_services() {
-                Toast.makeText(ActivityLogin.this, "Servidor En falla", Toast.LENGTH_SHORT).show();
+
             }
         });
     }
 
-    @Override
     public void showResultLogin(LoginDTO resp) {
         if (progressDialog.isShowing()){
             progressDialog.cancel();
@@ -163,7 +153,6 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         startActivity(intent);
     }
 
-    @Override
     public void showError(String error) {
         if (progressDialog.isShowing()){
             progressDialog.cancel();
@@ -229,4 +218,19 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         }
     }
 
+    public void login(JSONObject jsonObject) {
+
+        new ConsumeServicesExpress(jsonObject).consume_api(Defines.LOGIN, new OnResponseInterface() {
+            @Override
+            public void finish_consumer_services(JsonResponse jsonResponse) {
+
+            }
+
+            @Override
+            public void finish_fail_consumer_services() {
+
+            }
+        });
+
+    }
 }
