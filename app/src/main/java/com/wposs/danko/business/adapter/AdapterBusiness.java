@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -21,10 +22,12 @@ public class AdapterBusiness extends RecyclerView.Adapter<AdapterBusiness.Holder
 
     ArrayList<BusinessDTO> businessDTOS;
     Context context;
+    int tipoCategoria;
 
-    public AdapterBusiness(ArrayList<BusinessDTO> businessDTOS, Context context) {
+    public AdapterBusiness(ArrayList<BusinessDTO> businessDTOS, Context context, int tipoCategoria) {
         this.businessDTOS = businessDTOS;
         this.context = context;
+        this.tipoCategoria = tipoCategoria;
     }
 
     @NonNull
@@ -40,6 +43,7 @@ public class AdapterBusiness extends RecyclerView.Adapter<AdapterBusiness.Holder
                 .diskCacheStrategy(DiskCacheStrategy.ALL).into(holder.imageView);
         holder.name.setText(businessDTOS.get(position).getName());
         holder.description.setText(businessDTOS.get(position).getDescription());
+        holder.url.setText(businessDTOS.get(position).getUrl());
     }
 
     @Override
@@ -50,13 +54,14 @@ public class AdapterBusiness extends RecyclerView.Adapter<AdapterBusiness.Holder
     public class Holder extends RecyclerView.ViewHolder {
 
         ImageView imageView;
-        TextView name, description;
+        TextView name, description, url;
 
         public Holder(@NonNull View itemView) {
             super(itemView);
             imageView = itemView.findViewById(R.id.image_Business);
             name = itemView.findViewById(R.id.name_Business);
             description = itemView.findViewById(R.id.descripcion_Business);
+            url = itemView.findViewById(R.id.url_Business);
         }
     }
 }

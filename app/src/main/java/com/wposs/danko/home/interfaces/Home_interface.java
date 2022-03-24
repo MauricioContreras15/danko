@@ -9,11 +9,11 @@ import java.util.ArrayList;
 public interface Home_interface {
 
     interface View {
-        void showResponse(ArrayList<BusinessDTO>  businessDTO, Context context);
+        void showResponse(ArrayList<BusinessDTO> businessDTO, String id_categoria, String name_categoria, Context contex);
     }
 
     interface Presenter {
-        void setResponse(ArrayList<BusinessDTO> businessDTO, Context contex);
+        void setResponse(ArrayList<BusinessDTO> businessDTO, String id_categoria, String name_categoria, Context contex);
 
     }
 

@@ -13,5 +13,7 @@ public class Global {
     public static ArrayList<String> pais = new ArrayList<>();
     public static ArrayList<String> estado = new ArrayList<>();
     public static ArrayList<String> ciudad = new ArrayList<>();
+    public static int TIPO_CATEGORIA;
+    public static String NAME_CATEGORIA;
 
 }

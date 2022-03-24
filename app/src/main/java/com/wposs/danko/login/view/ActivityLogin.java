@@ -6,15 +6,17 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.airbnb.lottie.L;
+import com.google.gson.JsonObject;
 import com.wposs.danko.R;
 import com.wposs.danko.home.ActivityHome;
 import com.wposs.danko.interfaces.OnResponseInterface;
@@ -29,7 +31,6 @@ import com.wposs.danko.utils.Global;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
 public class ActivityLogin extends AppCompatActivity implements View.OnClickListener {
@@ -66,6 +67,11 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         if (v.getId() == buttonEnter.getId()) {
             validateField();
         }
+
+        if (v.getId() == buttonInvitado.getId()) {
+
+        }
+
     }
 
     private void initComponents() {
@@ -143,7 +149,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         });
     }
 
-    public void showResultLogin(LoginDTO resp) {
+    public void showCategories(LoginDTO resp) {
         if (progressDialog.isShowing()){
             progressDialog.cancel();
         }
@@ -223,7 +229,12 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         new ConsumeServicesExpress(jsonObject).consume_api(Defines.LOGIN, new OnResponseInterface() {
             @Override
             public void finish_consumer_services(JsonResponse jsonResponse) {
-
+                ///HAY QUE OBTENER EL JSONRESPONSE
+                if (progressDialog.isShowing()){
+                    progressDialog.cancel();
+                }
+                LoginDTO loginDTO = llenarDTO(jsonResponse);
+                showCategories(loginDTO);
             }
 
             @Override
@@ -233,4 +244,12 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         });
 
     }
+
+    private LoginDTO llenarDTO(JsonResponse jsonResponse){ // se obtiene la información del JsonResponse para llenar DTO
+        LoginDTO loginDTO = new LoginDTO();
+
+
+        return loginDTO;
+    }
+
 }

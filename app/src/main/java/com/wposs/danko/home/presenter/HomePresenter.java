@@ -13,7 +13,7 @@ public class HomePresenter implements Home_interface.Presenter {
 
 
     @Override
-    public void setResponse(ArrayList<BusinessDTO> businessDTO, Context contex) {
-        view.showResponse(businessDTO, contex);
+    public void setResponse(ArrayList<BusinessDTO> businessDTO, String id_categoria, String name_categoria, Context contex) {
+        view.showResponse(businessDTO, id_categoria, name_categoria, contex);
     }
 }
