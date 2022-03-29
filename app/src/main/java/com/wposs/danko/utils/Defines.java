@@ -16,4 +16,11 @@ public final class Defines {
     public static final int LOGIN = 4;
 
 
+    ///TIPO DE CATEGORIAS.
+
+    public static final int CATEGORIA_SALUD = 1;
+    public static final int CATEGORIA_EDUCACION = 2;
+    public static final int CATEGORIA_TURISMO = 3;
+    public static final int CATEGORIA_CENTROS_COMERCIALES = 4;
+
 }

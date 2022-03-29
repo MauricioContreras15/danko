@@ -225,8 +225,10 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
     }
 
     public void login(JSONObject jsonObject) {
-
-        new ConsumeServicesExpress(jsonObject).consume_api(Defines.LOGIN, new OnResponseInterface() {
+        JsonResponse jsonResponse = new JsonResponse();
+        LoginDTO loginDTO = llenarDTO(jsonResponse);
+        showCategories(loginDTO);
+        /*new ConsumeServicesExpress(jsonObject).consume_api(Defines.LOGIN, new OnResponseInterface() {
             @Override
             public void finish_consumer_services(JsonResponse jsonResponse) {
                 ///HAY QUE OBTENER EL JSONRESPONSE
@@ -241,12 +243,94 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
             public void finish_fail_consumer_services() {
 
             }
-        });
+        });*/
 
     }
 
     private LoginDTO llenarDTO(JsonResponse jsonResponse){ // se obtiene la información del JsonResponse para llenar DTO
+
         LoginDTO loginDTO = new LoginDTO();
+        loginDTO.setResponse("1");
+
+        ArrayList<CategoriasDTO> dtoList = new ArrayList<>();
+
+
+        CategoriasDTO categoriasDTO1 = new CategoriasDTO();
+        categoriasDTO1.setId("1");
+        categoriasDTO1.setName("INSTITUCIONES MEDICAS");
+        categoriasDTO1.setImg("----");
+        ArrayList<BusinessDTO> businessDTOList = new ArrayList<>();
+        BusinessDTO businessDTO1 = new BusinessDTO();
+        businessDTO1.setName("CLINICA MEDICAL DUARTE");
+        businessDTO1.setDescription("En Medical Duarte cada día laboramos orientados a la excelencia, a la innovación y al desarrollo social, para brindar a todos nuestros pacientes una experiencia superior en atención.");
+        businessDTO1.setId("1");
+        businessDTO1.setPais("Colombia");
+        businessDTO1.setEstado("Norte de Santander");
+        businessDTO1.setCiudad("Cúcuta");
+        businessDTO1.setImg("https://yt3.ggpht.com/ytc/AKedOLSAllMJ6e4AtNd7T-XKqA8gO3_orNU_EtdNXvdv=s900-c-k-c0x00ffffff-no-rj");
+        businessDTO1.setUrl("https://clinicamedicalduarte.com");
+        businessDTOList.add(businessDTO1);
+        BusinessDTO businessDTO12 = new BusinessDTO();
+        businessDTO12.setName("BBBB");
+        businessDTO12.setDescription("DESCRPICIÓN565");
+        businessDTO12.setId("2");
+        businessDTO12.setPais("Colombia");
+        businessDTO12.setEstado("Norte de Santander");
+        businessDTO12.setCiudad("Ocaña");
+        businessDTOList.add(businessDTO12);
+        categoriasDTO1.setBusinessDTOList(businessDTOList);
+        dtoList.add(categoriasDTO1);
+        loginDTO.setCategorias(dtoList);
+
+        CategoriasDTO categoriasDTO2 = new CategoriasDTO();
+        categoriasDTO2.setId("2");
+        categoriasDTO2.setName("Mauricio");
+        categoriasDTO2.setImg("----");
+        ArrayList<BusinessDTO> businessDTOList2 = new ArrayList<>();
+        BusinessDTO businessDTO = new BusinessDTO();
+        businessDTO.setName("KKKK");
+        businessDTO.setDescription("DESCRPICIÓN");
+        businessDTO.setId("1");
+        businessDTO.setPais("España");
+        businessDTO.setEstado("Sevilla");
+        businessDTO.setCiudad("Sevilla");
+        businessDTOList2.add(businessDTO);
+        BusinessDTO businessDTO2 = new BusinessDTO();
+        businessDTO2.setName("LLLL");
+        businessDTO2.setDescription("DESCRPICIÓN565");
+        businessDTO2.setId("2");
+        businessDTO2.setPais("España");
+        businessDTO2.setEstado("Cataluña");
+        businessDTO2.setCiudad("Barcelona");
+        businessDTOList2.add(businessDTO2);
+        categoriasDTO2.setBusinessDTOList(businessDTOList2);
+        dtoList.add(categoriasDTO2);
+        loginDTO.setCategorias(dtoList);
+
+        CategoriasDTO categoriasDTO3 = new CategoriasDTO();
+        categoriasDTO3.setId("3");
+        categoriasDTO3.setName("Contreras");
+        categoriasDTO3.setImg("----");
+        ArrayList<BusinessDTO> businessDTOList3 = new ArrayList<>();
+        BusinessDTO businessDTO3 = new BusinessDTO();
+        businessDTO3.setName("ZZZZ");
+        businessDTO3.setDescription("DESCRPICIÓNZZ");
+        businessDTO3.setId("1");
+        businessDTO3.setPais("Colombia");
+        businessDTO3.setEstado("Antioquia");
+        businessDTO3.setCiudad("Medellín");
+        businessDTOList3.add(businessDTO3);
+        BusinessDTO businessDTO31 = new BusinessDTO();
+        businessDTO31.setName("ZXX");
+        businessDTO31.setDescription("DESCRPICIÓNXX");
+        businessDTO31.setId("2");
+        businessDTO31.setPais("Colombia");
+        businessDTO31.setEstado("Antioquia");
+        businessDTO31.setCiudad("Itagui");
+        businessDTOList3.add(businessDTO31);
+        categoriasDTO3.setBusinessDTOList(businessDTOList3);
+        dtoList.add(categoriasDTO3);
+        loginDTO.setCategorias(dtoList);
 
 
         return loginDTO;

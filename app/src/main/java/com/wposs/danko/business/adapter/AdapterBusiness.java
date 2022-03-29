@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -14,7 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.wposs.danko.R;
+import com.wposs.danko.business.interfaces.Business_adaper;
+import com.wposs.danko.business.presenter.Business_presenter;
 import com.wposs.danko.login.dto.BusinessDTO;
+import com.wposs.danko.utils.Defines;
 
 import java.util.ArrayList;
 
@@ -23,6 +27,7 @@ public class AdapterBusiness extends RecyclerView.Adapter<AdapterBusiness.Holder
     ArrayList<BusinessDTO> businessDTOS;
     Context context;
     int tipoCategoria;
+    Business_adaper.Presenter presenter = new Business_presenter();
 
     public AdapterBusiness(ArrayList<BusinessDTO> businessDTOS, Context context, int tipoCategoria) {
         this.businessDTOS = businessDTOS;
@@ -33,7 +38,28 @@ public class AdapterBusiness extends RecyclerView.Adapter<AdapterBusiness.Holder
     @NonNull
     @Override
     public AdapterBusiness.Holder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_bussines, null, false);
+        View view = null;
+        switch (tipoCategoria) {
+            case Defines.CATEGORIA_SALUD:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_bussines, null, false);
+                break;
+
+            case Defines.CATEGORIA_CENTROS_COMERCIALES:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_bussines, null, false);
+                break;
+
+            case Defines.CATEGORIA_EDUCACION:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_bussines, null, false);
+                break;
+
+            case Defines.CATEGORIA_TURISMO:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_bussines, null, false);
+                break;
+
+            default:
+                view = LayoutInflater.from(parent.getContext()).inflate(R.layout.info_bussines, null, false);
+                break;
+        }
         return new Holder(view);
     }
 
@@ -44,6 +70,14 @@ public class AdapterBusiness extends RecyclerView.Adapter<AdapterBusiness.Holder
         holder.name.setText(businessDTOS.get(position).getName());
         holder.description.setText(businessDTOS.get(position).getDescription());
         holder.url.setText(businessDTOS.get(position).getUrl());
+
+        holder.url.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.setResponse(businessDTOS.get(position).getUrl(), businessDTOS.get(position).getName(), context);
+            }
+        });
+
     }
 
     @Override
