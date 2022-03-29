@@ -258,7 +258,7 @@ public class ActivityLogin extends AppCompatActivity implements View.OnClickList
         CategoriasDTO categoriasDTO1 = new CategoriasDTO();
         categoriasDTO1.setId("1");
         categoriasDTO1.setName("INSTITUCIONES MEDICAS");
-        categoriasDTO1.setImg("----");
+        categoriasDTO1.setImg("https://static.wikia.nocookie.net/eswikia/images/2/27/Medicina.jpg/revision/latest?cb=20160830143330");
         ArrayList<BusinessDTO> businessDTOList = new ArrayList<>();
         BusinessDTO businessDTO1 = new BusinessDTO();
         businessDTO1.setName("CLINICA MEDICAL DUARTE");
